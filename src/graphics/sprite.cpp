@@ -15,5 +15,6 @@ namespace engine {
                 : Renderable2D(maths::Vec2(width,height), maths::Vec3(x, y, 0), 0xffffffff), position(m_Position){
             m_Texture = texture;
         }
+
     }
 }

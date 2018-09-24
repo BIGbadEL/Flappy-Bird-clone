@@ -7,6 +7,7 @@
 
 #include <cstring>
 #include <string>
+#include <iostream>
 
 namespace engine{
     std::string read_file( const char *filepath);

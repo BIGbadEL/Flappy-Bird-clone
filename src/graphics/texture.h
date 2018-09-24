@@ -17,8 +17,9 @@ namespace engine {
             std::string m_FileName;
             GLuint m_TID;
             GLsizei m_Width, m_Height;
+            bool m_isRGBA;
         public:
-            Texture(const std::string &filename);
+            explicit Texture(const std::string &filename, bool isRGBA = false);
             ~Texture();
 
             void bind() const;

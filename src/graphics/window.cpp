@@ -8,24 +8,24 @@ namespace engine {
     namespace graphics{
 
         void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
-            Window *win = (Window*) glfwGetWindowUserPointer(window);
+            auto *win = (Window*) glfwGetWindowUserPointer(window);
             win->m_Keys[key] = action != GLFW_RELEASE;
         }
 
         void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
-            Window *win = (Window*) glfwGetWindowUserPointer(window);
+            auto *win = (Window*) glfwGetWindowUserPointer(window);
             win->m_MouseButtons[button] = action != GLFW_RELEASE;
         }
 
         void window_resize(GLFWwindow *window, int width, int haight){
             glViewport(0,0, width, haight);
-            Window *win = (Window*)(glfwGetWindowUserPointer(window));
+            auto *win = (Window*)(glfwGetWindowUserPointer(window));
             win->m_Width = width;
             win->m_Height = haight;
         }
 
         void cursor_position_callback(GLFWwindow* window, double xpos, double ypos){
-            Window *win = (Window*) glfwGetWindowUserPointer(window);
+            auto *win = (Window*) glfwGetWindowUserPointer(window);
             win->m_Mx = xpos;
             win->m_My = ypos;
         }
@@ -68,7 +68,7 @@ namespace engine {
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
             glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, 1);
 
-            m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
+            m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, nullptr, nullptr);
 
             if(!m_Window){
                 std::cout << "Fail to create GLFW window" << std::endl;
@@ -90,10 +90,9 @@ namespace engine {
             }
 
             glEnable( GL_BLEND );
-            glBlendFunc( GL_SRC_ALPHA, GL_ONE);
+            glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
-            std::cout << "OpenGL " <<  glGetString(GL_VERSION) << std::endl;
+            std::cout << "OpenGL " <<  glGetString(GL_VERSION) << " " << glGetString(GL_RENDERER)<< std::endl;
             return true;
         }
 

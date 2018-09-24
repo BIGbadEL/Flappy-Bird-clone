@@ -26,7 +26,8 @@ namespace engine {
             virtual void render();
 
             inline const std::vector<Renderable2D*>& getRenderable() const { return m_Renderables; }
-            inline const Shader* getShader() const { return m_Shader; }
+            inline Shader* getShader() const { return m_Shader; }
+            inline const Renderable2D* getSprite() const { return m_Renderables.back(); }
         };
 
     }
