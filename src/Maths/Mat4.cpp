@@ -1,3 +1,5 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "modernize-return-braced-init-list"
 //
 // Created by grzegorz on 21.09.18.
 //
@@ -7,14 +9,14 @@ namespace engine {
     namespace maths {
 
         Mat4::Mat4(){
-            for(int i = 0; i < 4 * 4; i++){
-                elements[i] = 0;
+            for (float &element : elements) {
+                element = 0;
             }
         }
 
         Mat4::Mat4(float diagonal){
-            for(int i = 0; i < 4 * 4; i++){
-                elements[i] = 0;
+            for (float &element : elements) {
+                element = 0;
             }
 
             elements[0 + 0 * 4] = diagonal;
@@ -158,8 +160,6 @@ namespace engine {
             return left.multiply(right);
         }
 
-
-
-
     }
 }
+#pragma clang diagnostic pop

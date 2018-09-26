@@ -6,13 +6,15 @@
 
 
 #include "src/engine_gl.h"
+#include "Pipe.h"
 
-#define ACCELERATION (-2.0f/360.f)
-#define VELOSITY (0.3f)
+#define ACCELERATION (-2.0f/360.0f)
+#define VELOCITY (0.3f)
 
 using namespace engine;
 using namespace graphics;
 using namespace maths;
+
 
 class Game : public EngineGL {
 private:
@@ -23,17 +25,22 @@ private:
 
     Layer *Bird;
     Texture *birdTex;
-    float velosity;
+    float velocity;
+    float BirdPositionY;
+    float BirdPositionX;
+
+
+    Pipe *pipe;
+
 
 
     Layer *logLayer;
     Label *fps;
     Label *ups;
 
-
 public:
-    Game(): window(nullptr), BackGround(nullptr), BgTex(nullptr), Bird(nullptr), birdTex(nullptr), velosity(0), logLayer(
-            nullptr), fps(nullptr), ups(nullptr){ }
+    Game(): window(nullptr), BackGround(nullptr), BgTex(nullptr), Bird(nullptr), birdTex(nullptr), velocity(0), BirdPositionY(0), BirdPositionX(0),
+            pipe(nullptr), logLayer(nullptr), fps(nullptr), ups(nullptr) { }
 
     ~Game();
 
@@ -44,6 +51,8 @@ public:
     void update() override;
 
     void tick() override;
+
+
 
 };
 

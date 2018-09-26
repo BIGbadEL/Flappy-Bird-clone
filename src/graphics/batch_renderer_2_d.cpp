@@ -103,7 +103,7 @@ namespace engine {
             glBindVertexArray(m_VAO);
             m_IBO->bind();
 
-            glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, NULL);
+            glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, nullptr);
 
             glBindVertexArray(0);
             m_IBO->unbind();
@@ -120,14 +120,14 @@ namespace engine {
             glGenVertexArrays(1, &m_VAO);
             glBindVertexArray(m_VAO);
 
-            glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
+            glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, nullptr, GL_DYNAMIC_DRAW);
 
             glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
             glEnableVertexAttribArray(SHADER_UV_INDEX);
             glEnableVertexAttribArray(SHADER_TID_INDEX);
             glEnableVertexAttribArray(SHADER_COLOR_INDEX);
 
-            glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)0);
+            glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)nullptr);
             glVertexAttribPointer(SHADER_UV_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::uv));
             glVertexAttribPointer(SHADER_TID_INDEX, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::tid));
             glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::color));
@@ -135,26 +135,26 @@ namespace engine {
 
             glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-            GLuint *indeces = new GLuint[RENDERER_INDICES_SIZE];
+            auto *indices = new GLuint[RENDERER_INDICES_SIZE];
 
             int offset = 0;
             for(int i = 0; i < RENDERER_INDICES_SIZE; i += 6, offset += 4){
 
-                indeces[i + 0] = offset + 0;
-                indeces[i + 1] = offset + 1;
-                indeces[i + 2] = offset + 2;
-                indeces[i + 3] = offset + 2;
-                indeces[i + 4] = offset + 3;
-                indeces[i + 5] = offset + 0;
+                indices[i + 0] = offset + 0;
+                indices[i + 1] = offset + 1;
+                indices[i + 2] = offset + 2;
+                indices[i + 3] = offset + 2;
+                indices[i + 4] = offset + 3;
+                indices[i + 5] = offset + 0;
 
             }
 
-            m_IBO = new IndexBuffer(indeces, RENDERER_INDICES_SIZE);
+            m_IBO = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
             m_IndexCount = 0;
 
             glBindVertexArray(0);
 
-            delete [] indeces;
+            delete [] indices;
         }
 
         void BatchRenderer2D::drawString(const std::string& text, const maths::Vec3& position, const Font &font, const unsigned int color){
