@@ -7,10 +7,8 @@
 
 Game::~Game() {
     delete logLayer;
-    delete BackGround;
-    delete BgTex;
-    delete birdTex;
-    delete Bird;
+    delete background;
+    delete bird;
     delete pipe;
 
 }
@@ -29,60 +27,30 @@ void Game::init() {
     logLayer->add(ups);
 
 
-    BackGround = new Layer(new BatchRenderer2D, new Shader("Shaders/basic.vert", "Shaders/basic.frag"), ortMat);
-
-    BgTex = new Texture("textures/bg.png");
-
-    BackGround->add( new Sprite(-16.0f + 0 * 9, -9.0f, 9, 18, BgTex));
-    BackGround->add( new Sprite(-16.0f + 1 * 9, -9.0f, 9, 18, BgTex));
-    BackGround->add( new Sprite(-16.0f + 2 * 9, -9.0f, 9, 18, BgTex));
-    BackGround->add( new Sprite(-16.0f + 3 * 9, -9.0f, 9, 18, BgTex));
-    BackGround->add( new Sprite(-16.0f + 4 * 9, -9.0f, 9, 18, BgTex));
-
-    Bird = new Layer(new BatchRenderer2D, new Shader("Shaders/basic.vert", "Shaders/basic.frag"), ortMat);
-
-    birdTex = new Texture("textures/bird.png", true);
-    Bird->add( new Sprite(0.0f, 0.0f, 1.0f, 1.0f, birdTex));
-
+    background = new BackGround(0.01);
+    bird = new Bird(ACCELERATION, BirdPositionX, BirdPositionY);
     pipe = new Pipe(5);
-
 
 }
 
 
 void Game::render() { //as fast as possible
-    BackGround->render();
-    logLayer->render();
-    pipe->drewPipes();
 
-    Bird->render();
+   background->drewBG();
+   logLayer->render();
+   pipe->drewPipes();
+   bird->drewBird();
 
-
-    if(window->isKeyTyped(GLFW_KEY_SPACE)) velocity = VELOCITY;
+   if(window->isKeyTyped(GLFW_KEY_SPACE)) spacePressed = true;
 
 }
 
 void Game::update() { //60 per second
 
-    std::vector<Renderable2D*> BG =  BackGround->getRenderable();
-    float speed = 0.01;
-    for(unsigned int i = 0; i < 5; i++){
-        ((Sprite*)(BG.at(i)))->position.x -= speed;
-        if (-16.0f - 9 >= ((Sprite *) (BG.at(i)))->position.x) ((Sprite*)(BG.at(i)))->position.x = -16.0f + 4 * 9;
-    }
-
-    velocity += ACCELERATION;
-    BirdPositionY += velocity;
-
-    Shader *temp = Bird->getShader();
-    temp->enable();
-
-    temp->setUniformMat4("vm_matrix", Mat4::translation(Vec3(0.0f, BirdPositionY, 0.0f)) *  Mat4::roatation(velocity * 90, Vec3(0.0f, 0.0f, 1.0f)));
-
-    temp->disable();
-
+    background->moveBG();
+    bird->moveBird(spacePressed);
+    spacePressed = false;
     pipe->movePipe();
-
 
 }
 

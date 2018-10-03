@@ -7,9 +7,11 @@
 
 #include "src/engine_gl.h"
 #include "Pipe.h"
+#include "BackGround.h"
+#include "Bird.h"
 
 #define ACCELERATION (-2.0f/360.0f)
-#define VELOCITY (0.3f)
+
 
 using namespace engine;
 using namespace graphics;
@@ -20,12 +22,15 @@ class Game : public EngineGL {
 private:
     Window *window;
 
-    Layer *BackGround;
+    //Layer *BackGround;
     Texture *BgTex;
 
-    Layer *Bird;
-    Texture *birdTex;
-    float velocity;
+    BackGround *background;
+
+//    Layer *Bird;
+    Bird *bird;
+    bool spacePressed;
+
     float BirdPositionY;
     float BirdPositionX;
 
@@ -39,7 +44,7 @@ private:
     Label *ups;
 
 public:
-    Game(): window(nullptr), BackGround(nullptr), BgTex(nullptr), Bird(nullptr), birdTex(nullptr), velocity(0), BirdPositionY(0), BirdPositionX(0),
+    Game(): window(nullptr), BgTex(nullptr), background(nullptr), bird(nullptr), spacePressed(false), BirdPositionY(0), BirdPositionX(0),
             pipe(nullptr), logLayer(nullptr), fps(nullptr), ups(nullptr) { }
 
     ~Game();

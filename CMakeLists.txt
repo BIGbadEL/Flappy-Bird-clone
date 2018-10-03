@@ -86,6 +86,6 @@ add_executable(EngineGL
         src/utils/string_utils.h
         src/utils/Timer.h
         src/engine_gl.h
-        main.cpp Game.h Game.cpp Pipe.cpp Pipe.h myLayer.h)
+        main.cpp Game.h Game.cpp Pipe.cpp Pipe.h myLayer.h BackGround.h BackGround.cpp Bird.cpp Bird.h)
 
 target_link_libraries(EngineGL freeimage GLEW glfw3 GL X11 Xi Xrandr Xxf86vm Xinerama Xcursor rt m pthread dl freetype gorilla openal)

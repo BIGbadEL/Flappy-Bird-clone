@@ -9,6 +9,8 @@
 class myLayer : public engine::graphics::Layer{
 
     friend class Pipe;
+    friend class BackGround;
+    friend class Bird;
 
 public:
     myLayer(engine::graphics::Shader *shader, engine::maths::Mat4 matrix)
@@ -16,11 +18,6 @@ public:
 
     }
 
-    void destroy(){
-//        delete m_Renderables.at(0);
-//        delete temp.at(1);
-//        temp.erase(temp.begin());
-//        temp.erase(temp.begin());
-    }
+
 };
 

@@ -19,7 +19,7 @@ private:
     myLayer *m_Layer;
     engine::graphics::Texture *m_Pipe_down;
     engine::graphics::Texture *m_Pipe_up;
-    //std::vector<float> m_PosX;
+
     float m_PosX;
     float m_BreakSize;
 
